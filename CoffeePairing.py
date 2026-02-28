@@ -3,8 +3,6 @@ import csv
 import random
 import copy
 import os
-#test
-#test
 
 # path to the CSV files with participant data
 participants_csv = "Coffee Partner Lottery participants.csv"
@@ -48,6 +46,29 @@ npairs = set()
 
 # running set of participants
 nparticipants = copy.deepcopy(participants)
+
+# set maximum group size to *half* of amount of participants
+maximumGSize = float.__floor__(len(nparticipants) / 2)
+
+while True:
+    choise = input("Do you want random group sizes (0) or choose manually (1)? ")
+    if choise == 0:
+        gsize = random.randint(2, maximumGSize)
+        print(f"Creating groups of {gsize}...")
+
+    elif choise == 1:
+        # ask for group sizes between 2 and maximum group size
+        gsize = int(input(f"  How many participants should be paired together?\n  Input full number between 2 and {maximumGSize}: "))
+        # check for valid input
+        if gsize < 2 or gsize > maximumGSize:
+            print("This is not a valid input. Please choose again.")
+            continue
+
+    else:
+        print("This is not a valid input. Please choose again.")
+        continue
+
+    break
 
 # Boolean flag to check if new pairing has been found
 new_pairs_found = False
