@@ -52,48 +52,53 @@ nparticipants = copy.deepcopy(participants)
 # Boolean flag to check if new pairing has been found
 new_pairs_found = False
 
+def createGroup(newParticipants, groupSize):
+    participant = random.choice(newParticipants)
+    if groupSize < 2:
+        return [participant]
+    else:
+        return [participant] + createGroup(newParticipants, groupSize - 1)
+
 # try creating new pairing until successful
 while not new_pairs_found:   # to do: add a maximum number of tries
-  
+
     # if odd number of participants, create one triple, then pairs
-    if len(participants)%2 != 0:
+    if len(participants) % gsize != 0:
         
-        # take three random participants from list of participants
-        p1 = random.choice(nparticipants)
-        nparticipants.remove(p1)
+        # # take three random participants from list of participants
+        # p1 = random.choice(nparticipants)
+        # nparticipants.remove(p1)
     
-        p2 = random.choice(nparticipants)
-        nparticipants.remove(p2)
+        # p2 = random.choice(nparticipants)
+        # nparticipants.remove(p2)
         
-        p3 = random.choice(nparticipants)
-        nparticipants.remove(p3)
+        # p3 = random.choice(nparticipants)
+        # nparticipants.remove(p3)
         
         # create alphabetically sorted list of participants
-        plist = [p1, p2, p3]
+        plist = createGroup(nparticipants, gsize + 1)
         plist.sort()
                         
         # add alphabetically sorted list to set of pairs
         npairs.add(tuple(plist))
 
-  
     # while still participants left to pair...
     while len(nparticipants) > 0:
 
-        # take two random participants from list of participants
-        p1 = random.choice(nparticipants)
-        nparticipants.remove(p1)
-    
-        p2 = random.choice(nparticipants)
-        nparticipants.remove(p2)
-                
+        # # take two random participants from list of participants
+        # p1 = random.choice(nparticipants)
+        # nparticipants.remove(p1)
+
+        # p2 = random.choice(nparticipants)
+        # nparticipants.remove(p2)
+
         # create alphabetically sorted list of participants
-        plist = [p1, p2]
+        plist = createGroup(nparticipants, gsize)
         plist.sort()
-                        
+
         # add alphabetically sorted list to set of pairs
         npairs.add(tuple(plist))
 
- 
     # check if all new pairs are indeed new, else reset
     if npairs.isdisjoint(opairs):
         new_pairs_found = True
