@@ -51,7 +51,7 @@ nparticipants = copy.deepcopy(participants)
 maximumGSize = float.__floor__(len(nparticipants) / 2)
 
 while True:
-    choise = input("Do you want random group sizes (0) or choose manually (1)? ")
+    choise = int(input("Do you want random group sizes (0) or choose manually (1)? "))
     if choise == 0:
         gsize = random.randint(2, maximumGSize)
         print(f"Creating groups of {gsize}...")
@@ -75,6 +75,7 @@ new_pairs_found = False
 
 def createGroup(newParticipants, groupSize):
     participant = random.choice(newParticipants)
+    newParticipants.remove(participant)
     if groupSize < 2:
         return [participant]
     else:
@@ -86,16 +87,6 @@ while not new_pairs_found:   # to do: add a maximum number of tries
     # if odd number of participants, create one triple, then pairs
     if len(participants) % gsize != 0:
         
-        # # take three random participants from list of participants
-        # p1 = random.choice(nparticipants)
-        # nparticipants.remove(p1)
-    
-        # p2 = random.choice(nparticipants)
-        # nparticipants.remove(p2)
-        
-        # p3 = random.choice(nparticipants)
-        # nparticipants.remove(p3)
-        
         # create alphabetically sorted list of participants
         plist = createGroup(nparticipants, gsize + 1)
         plist.sort()
@@ -105,13 +96,6 @@ while not new_pairs_found:   # to do: add a maximum number of tries
 
     # while still participants left to pair...
     while len(nparticipants) > 0:
-
-        # # take two random participants from list of participants
-        # p1 = random.choice(nparticipants)
-        # nparticipants.remove(p1)
-
-        # p2 = random.choice(nparticipants)
-        # nparticipants.remove(p2)
 
         # create alphabetically sorted list of participants
         plist = createGroup(nparticipants, gsize)
