@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "nimble-gate-489210-s6",
+  "private_key_id": "988cdfa57a06d65cd9712efa07eb1ec9a75c33b0",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDDxKJXUZVwpdXT\n+cllaOZkuBv0VJ1yDP5hYcTZAc+n4FZZlW53D1SouY+KpmUqO7lFCNqTlGi6m5mT\nqBHD+1Izu6CBk+JjZcYX9fgFQDgF1Q3CPu6IfmqexGr5sLXjE0qMC9/1t+fjPOI9\nnK68uNUQGtZjc1YrzWBpRzI2aQAAaJvrGRHXnvS+0t09Yug0KNPN8WiN1pHeay0r\nhfg08hFBsN/w9ReTG78HvLrbBG5Ka/wtZX3QifYI692VQcRG1tbSS6rngU23VDgf\nTzFoSV7QfCkttnXPVthqLKlzM4BsIflcGiuR9naS5LiBw74T6++GsIoT5BxnJ3ya\nnbRkBJ0hAgMBAAECggEAI4sQKXfdwMfPKI8dpmyTBf7aTnRNaK9cwRwB5B98zv8/\nVkD3/yRYq9CS8+qti+svgk3u92P21siY69LUNOesn0llxRjvPbo06tVE7FkiQsbR\nmm6YGs6O95f0TzSq9VkjjAU86o0zDBIaBnMr04ZgYq3otkIyxz2gz0R2pKPQNQJ3\nfKYa9otSh25GxO7nsh/Z4Mtf/uCCMoe12y9Mah0srs3m/VGLbCCbqA+ZNNn7/7Cv\nI2vYtGdBm0hZ8w9Lvj7p7t470/oRSl+mBcIfEuZxmz23BbEZewi9T+eMZXoAlH+u\nlNOwHCdEJw1P5i3b+V5WCG9qG2llJ9OMnJyFdLocJQKBgQD21+UgoIuawh3TS4YZ\nWxTxqWc9UDnKzLMv2MDCEtc7WouBMHtdcoBztrJEL+2x457YiuiQj6Y9WbsBbaRA\nP+LJeToBGiEwlItAmjgGvWYU8NpLyZs8VLj2MMr590/XOSOLmTSxItTuTQwtjJR6\nnA+kpYTPhJq3YSO8g4Zt49VLbQKBgQDLB7ZEIVWE1tyA6X6wPg/jDdHozB8Urunm\nrmH41XjrR0RmJJE6E/SJgcyAF8h+tvY2+s0srIYcKxGojwKtb99gvSWtvCTv0ks5\nuR8AbvJyFhRZujpMje1NwfoiItjKEYm5mz0cEsU0mDzg4Kdk1TZUNhBxDXMnTaed\nQRGl1qg0BQKBgQDzt5hIDZupEk4maCQf9tkH/c2sMQDOpiupayZut/GAbdbdmEPF\nsR74oQMD5hqXD/mvLf+Pc/WcD3NfZqTMtwcxC5tkqSrp71BKWbpFlU0sEd5HA+hc\nuf3hPa26/h77jjP1SjBHUO/R1YrXkjyrjli3pKErz25+7s88+tOIvnHDRQKBgQCm\nsCg2e1+o9naG6Cz5KZsFgR0rkhqacpjaqaUKFMl38UT4z2DkW+nS01xAdkZHspMm\nxHabDPH2Qm33A6LhHg45cFF0+BkjRHY6aABJ7MzkWbhPipO+sm93/aANUqrGC+wV\nFJzxZX+/FJY20nrcUCiQruqExtQaGqlYdEm27CuguQKBgQDQ28b4ksbYV9yRDDYC\n6YKHpx8kZ3L5iOk5V+ZG+wtnJSn0tj5Km8CJfheJbjCOa67iNg3ta1HZrTkW5CZQ\nv+w1chtVUZ4YkujAc0uSz07lrsT8jToSrScs7rnkYSSjyXBYv2HXpfDcRdG/N/7H\n4GBUzhox8u3wNMXhZG6BRiH0uQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "coffeeprojectgroup1@nimble-gate-489210-s6.iam.gserviceaccount.com",
+  "client_id": "107373970081739459208",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/coffeeprojectgroup1%40nimble-gate-489210-s6.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
