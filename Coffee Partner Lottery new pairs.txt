@@ -1,4 +1,5 @@
 ------------------------
 Today's coffee partners:
 ------------------------
-* John Doe (b.fatima@students.uu.nl), Bea Fatima (bfatim0042@gmail.com)
+* Bea Fatima (bfatim0042@gmail.com), Mary Smith (testtest@gmail.com)
+* John Doe (b.fatima@students.uu.nl), John Doe (test@gmail.com)

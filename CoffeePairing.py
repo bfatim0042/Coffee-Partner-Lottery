@@ -24,7 +24,7 @@ SCOPES = [
     "https://www.googleapis.com/auth/drive"
 ]
 
-#using JSON credentials and authorizing (go to account google drive and download)
+#using JSON credentials and authorizing (go to account google drive and download key)
 creds = Credentials.from_service_account_file("key.json", scopes=SCOPES)
 client = gspread.authorize(creds)
 
