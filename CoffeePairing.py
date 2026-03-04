@@ -22,7 +22,7 @@ participants_csv = "Coffee Partner Lottery participants.csv.csv"
 
 # header names in the CSV file (name and e-mail of participants)
 header_name = "Your name:"
-header_email = "Your email address:"
+header_email = "Your e-mail:"
 
 # path to TXT file that stores the pairings of this round
 new_pairs_txt = "Coffee Partner Lottery new pairs.txt"
