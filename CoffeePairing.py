@@ -1,22 +1,22 @@
+#general libraries 
 import pandas as pd
 import csv
 import random
 import copy
 import os
-#bea's branch
 
 #resources:
 #https://learndataanalysis.org/google-py-file-source-code/
 #https://github.com/burnash/gspread
 #https://aryanirani123.medium.com/read-and-write-data-in-google-sheets-using-python-and-the-google-sheets-api-6e206a242f20
 
-#pip install gspread google-auth
+#execute this in terminal: pip install gspread google-auth
 #username: coffeeprojectgroup1@gmail.com
 #password: CoffeeCoffeeCoffee
 #form link: https://docs.google.com/forms/d/e/1FAIpQLSfTtx1Zv_239qeMjlAAfU8BOABsQGbILvXG9_RGsnLRJbB_BQ/viewform?usp=dialog
 
+#libraries to handle API
 import gspread
-import csv
 from google.oauth2.service_account import Credentials
 
 SCOPES = [
@@ -24,14 +24,17 @@ SCOPES = [
     "https://www.googleapis.com/auth/drive"
 ]
 
+#using JSON credentials and authorizing 
 creds = Credentials.from_service_account_file("coffeekey.json", scopes=SCOPES)
-
 client = gspread.authorize(creds)
 
+#opening using sheet link
 sheet = client.open_by_key("1_3pTBJ4FE_9h_2rRM-5GXTPmuSc4UESqrP-Z3Fx3ZxU").sheet1
 
+#put sheets entries into var called data
 data = sheet.get_all_records()
 
+#copy sheets data into the csv, creating correct headers, etc
 with open("participants.csv", "w", newline="") as file:
     writer = csv.writer(file)
     writer.writerow(["Your name:", "Your email address:"])
