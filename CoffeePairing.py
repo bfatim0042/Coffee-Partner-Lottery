@@ -5,7 +5,11 @@ import copy
 import os
 #bea's branch
 
+#resources:
 #https://learndataanalysis.org/google-py-file-source-code/
+#https://github.com/burnash/gspread
+#https://aryanirani123.medium.com/read-and-write-data-in-google-sheets-using-python-and-the-google-sheets-api-6e206a242f20
+
 #pip install gspread google-auth
 #username: coffeeprojectgroup1@gmail.com
 #password: CoffeeCoffeeCoffee
@@ -15,11 +19,16 @@ import gspread
 import csv
 from google.oauth2.service_account import Credentials
 
+<<<<<<< HEAD
+=======
+#required scopes 
+>>>>>>> 29ddf09445a6655a856e37f2061b33661122338e
 SCOPES = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive"
 ]
 
+<<<<<<< HEAD
 creds = Credentials.from_service_account_file("coffeekey.json", scopes=SCOPES)
 
 client = gspread.authorize(creds)
@@ -29,16 +38,37 @@ sheet = client.open_by_key("1_3pTBJ4FE_9h_2rRM-5GXTPmuSc4UESqrP-Z3Fx3ZxU").sheet
 data = sheet.get_all_records()
 
 with open("participants.csv", "w", newline="") as file:
+=======
+#key created by API, authorizing
+creds = Credentials.from_service_account_file("coffeekey.json", scopes=SCOPES)
+client = gspread.authorize(creds)
+
+#created a google sheet with entries and shared with the api email, inputting link to sheet
+sheet = client.open_by_key("1_3pTBJ4FE_9h_2rRM-5GXTPmuSc4UESqrP-Z3Fx3ZxU").sheet1
+
+#reading all data and storing in a var
+data = sheet.get_all_records()
+
+#creating csv file (using one already in documentation)
+#format is name, email
+with open("Coffee Partner Lottery participants.csv", "w", newline="") as file:
+>>>>>>> 29ddf09445a6655a856e37f2061b33661122338e
     writer = csv.writer(file)
     writer.writerow(["Your name:", "Your email address:"])
 
     for row in data:
         writer.writerow([row["Your name:"], row["Your email address:"]])
 
+<<<<<<< HEAD
 print("participants.csv created successfully.")
 
 # path to the CSV files with participant data
 <<<<<<< HEAD
+=======
+print("Coffee Partner Lottery participants.csv created successfully.")
+
+#path to the CSV files with participant data
+>>>>>>> 29ddf09445a6655a856e37f2061b33661122338e
 participants_csv = "Coffee Partner Lottery participants.csv"
 =======
 participants_csv = "participants.csv"
@@ -46,7 +76,7 @@ participants_csv = "participants.csv"
 
 # header names in the CSV file (name and e-mail of participants)
 header_name = "Your name:"
-header_email = "Your e-mail:"
+header_email = "Your email address:"
 
 # path to TXT file that stores the pairings of this round
 new_pairs_txt = "Coffee Partner Lottery new pairs.txt"
