@@ -34,12 +34,26 @@ client = gspread.authorize(creds)
 #created a google sheet with entries and shared with the api email, inputting link to sheet
 sheet = client.open_by_key("1_3pTBJ4FE_9h_2rRM-5GXTPmuSc4UESqrP-Z3Fx3ZxU").sheet1
 
+#reading all data and storing in a var
+data = sheet.get_all_records()
+
+#creating csv file (using one already in documentation)
+#format is name, email
+with open("Coffee Partner Lottery participants.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(["Your name:", "Your email address:"])
+
+    for row in data:
+        writer.writerow([row["Your name:"], row["Your email address:"]])
+
+print("Coffee Partner Lottery participants.csv created successfully.")
+
 #path to the CSV files with participant data
 participants_csv = "Coffee Partner Lottery participants.csv"
 
 # header names in the CSV file (name and e-mail of participants)
 header_name = "Your name:"
-header_email = "Your e-mail:"
+header_email = "Your email address:"
 
 # path to TXT file that stores the pairings of this round
 new_pairs_txt = "Coffee Partner Lottery new pairs.txt"
