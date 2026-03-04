@@ -18,7 +18,7 @@ import csv
 from google.oauth2.service_account import Credentials
 
 # path to the CSV files with participant data
-participants_csv = "Coffee Partner Lottery participants.csv.csv"
+participants_csv = "Coffee Partner Lottery participants.csv"
 
 # header names in the CSV file (name and e-mail of participants)
 header_name = "Your name:"
