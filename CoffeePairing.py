@@ -41,9 +41,6 @@ with open("participants.csv", "w", newline="") as file:
 
 print("participants.csv created successfully.")
 
-# path to the CSV files with participant data
-print("participants.csv created successfully.")
-
 #path to the CSV files with participant data
 participants_csv = "participants.csv"
 
