@@ -39,12 +39,9 @@ with open("participants.csv", "w", newline="") as file:
     for row in data:
         writer.writerow([row["Your name:"], row["Your email address:"]])
 
-<<<<<<< HEAD
 print("participants.csv created successfully.")
 
 # path to the CSV files with participant data
-<<<<<<< HEAD
-=======
 print("participants.csv created successfully.")
 
 #path to the CSV files with participant data
