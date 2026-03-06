@@ -84,15 +84,35 @@ def createGroup(newParticipants, groupSize):
 # try creating new pairing until successful
 while not new_pairs_found:   # to do: add a maximum number of tries
 
-    # if odd number of participants, create one triple, then pairs
-    if len(participants) % gsize != 0:
-        
-        # create alphabetically sorted list of participants
-        plist = createGroup(nparticipants, gsize + 1)
-        plist.sort()
-                        
-        # add alphabetically sorted list to set of pairs
-        npairs.add(tuple(plist))
+    remainder = len(participants) % gsize
+    # if odd number of participants
+    if remainder != 0:
+        quotient = len(participants) // gsize
+
+        # try creating groups of other sizes for the amount of possible groups + 1
+        for i in range(quotient + 1):
+            # if even groups can be created, end loop
+            if remainder <= 0:
+                break
+
+            # if at last loop, just put all remaining people in a group
+            if i == quotient:
+                plist = createGroup(nparticipants, remainder)
+
+            # else if remainder is even add 2 to group size
+            elif remainder % 2 == 0:
+                plist = createGroup(nparticipants, gsize + 2)
+                remainder -= 2
+            # or just 1
+            else:
+                plist = createGroup(nparticipants, gsize + 1)
+                remainder -= 1
+            
+            # whatever group is created, sort it
+            plist.sort()
+                            
+            # add alphabetically sorted list to set of pairs
+            npairs.add(tuple(plist))
 
     # while still participants left to pair...
     while len(nparticipants) > 0:
