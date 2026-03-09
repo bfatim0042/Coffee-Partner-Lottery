@@ -99,6 +99,10 @@ while not new_pairs_found:   # to do: add a maximum number of tries
             if i == quotient:
                 plist = createGroup(nparticipants, remainder)
 
+            # else if remainder is big enough just put all in 1 group
+            elif remainder > gsize / 2:
+                plist = createGroup(nparticipants, remainder)
+                remainder = 0
             # else if remainder is even add 2 to group size
             elif remainder % 2 == 0:
                 plist = createGroup(nparticipants, gsize + 2)
