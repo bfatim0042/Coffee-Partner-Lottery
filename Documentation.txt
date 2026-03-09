@@ -1,0 +1,25 @@
+Google Form created for this project: https://docs.google.com/forms/d/e/1FAIpQLSfTtx1Zv_239qeMjlAAfU8BOABsQGbILvXG9_RGsnLRJbB_BQ/viewform?usp=dialog
+
+The Google Form -> .csv procedure was created using the following resources:
+https://learndataanalysis.org/google-py-file-source-code/
+https://github.com/burnash/gspread
+https://aryanirani123.medium.com/read-and-write-data-in-google-sheets-using-python-and-the-google-sheets-api-6e206a242f20
+
+
+The instructions to run are as follows:
+1. Make sure the correct modules are installed by executing this in terminal: pip install gspread google-auth
+
+2. Attached to the project is a file labeled key.json. The JSON key must also be placed in the same folder as the source code. 
+If for some reason it does not work, a new JSON code can be created by logging into the Google account created for this project (details included in final writeup).
+
+Then, access the Google Cloud console, and go to Menu -> APIs & Services -> Credentials -> Create Credentials.
+A new JSON key will be autodownloaded. Rename this as key.json and keep in the source code folder.
+
+If all else fails, download the .csv directly from here: 
+https://docs.google.com/spreadsheets/d/1_3pTBJ4FE_9h_2rRM-5GXTPmuSc4UESqrP-Z3Fx3ZxU/edit?usp=sharing
+
+3. Run the code, and it should output the correct pairings.
+
+Thank you for using our program!
+
+

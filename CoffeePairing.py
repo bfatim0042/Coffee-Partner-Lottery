@@ -1,3 +1,4 @@
+#general libraries 
 import pandas as pd
 import csv
 import random
@@ -7,48 +8,46 @@ import os
 #test
 #test1
 
-# path to the CSV files with participant data
-participants_csv = "Coffee Partner Lottery participants.csv"
 
-# header names in the CSV file (name and e-mail of participants)
-header_name = "Your name:"
-header_email = "Your e-mail:"
+#libraries to handle API
+import gspread
+from google.oauth2.service_account import Credentials
 
-# path to TXT file that stores the pairings of this round
-new_pairs_txt = "Coffee Partner Lottery new pairs.txt"
+def create_pairings(): 
+    SCOPES = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive"
+    ]
+    #Instructions to access the key are in the documentation 
+    creds = Credentials.from_service_account_file("key.json", scopes=SCOPES)
+    client = gspread.authorize(creds)
 
-# path to CSV file that stores the pairings of this round
-new_pairs_csv = "Coffee Partner Lottery new pairs.csv"
+    #Opening the sheet attached to the Google Form responses 
+    sheet = client.open_by_key("1_3pTBJ4FE_9h_2rRM-5GXTPmuSc4UESqrP-Z3Fx3ZxU").sheet1
 
-# path to CSV file that stores all pairings (to avoid repetition)
-all_pairs_csv = "Coffee Partner Lottery all pairs.csv"
-        
-# init set of old pairs
-opairs = set()
+    #Put entries into variable named data
+    data = sheet.get_all_records()
 
-DELIMITER=','
+    #Copy sheets data into the participants csv, creating correct headers, etc
+    with open("participants.csv", "w", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow(["Your name:", "Your email address:"])
 
-# load all previous pairings (to avoid redundancies)
-if os.path.exists(all_pairs_csv):
-    with open(all_pairs_csv, "r") as file:
-        csvreader = csv.reader(file, delimiter=DELIMITER)
-        for row in csvreader:
-            group = []
-            for i in range(0,len(row)):
-                group.append(row[i])                        
-            opairs.add(tuple(group))
+        for row in data:
+            writer.writerow([row["Your name:"], row["Your email address:"]])
 
-# load participant's data
-formdata = pd.read_csv(participants_csv, sep=DELIMITER)
+    #Path to the CSV files with participant data
+    participants_csv = "participants.csv"
 
-# create duplicate-free list of participants
-participants = list(set(formdata[header_email]))
+    #Header names in the CSV file (name and e-mail of participants)
+    header_name = "Your name:"
+    header_email = "Your email address:"
 
- # init set of new pairs
-npairs = set()
+    # path to TXT file that stores the pairings of this round
+    new_pairs_txt = "Coffee Partner Lottery new pairs.txt"
 
-# running set of participants
-nparticipants = copy.deepcopy(participants)
+    # path to CSV file that stores the pairings of this round
+    new_pairs_csv = "Coffee Partner Lottery new pairs.csv"
 
 # set maximum group size to *half* of amount of participants
 maximumGSize = float.__floor__(len(nparticipants) / 2)
@@ -138,61 +137,84 @@ while not new_pairs_found:   # to do: add a maximum number of tries
         npairs = set()
         nparticipants = copy.deepcopy(participants)
 
-
-# assemble output for printout
-output_string = ""
-
-output_string += "------------------------\n"
-output_string += "Today's coffee partners:\n"
-output_string += "------------------------\n"
-
-for pair in npairs:
-    pair = list(pair)
-    output_string += "* "
-    for i in range(0,len(pair)):
-        name_email_pair = f"{formdata[formdata[header_email] == pair[i]].iloc[0][header_name]} ({pair[i]})"
-        if i < len(pair)-1:
-            output_string += name_email_pair + ", "
-        else:
-            output_string += name_email_pair + "\n"
     
-# write output to console
-print(output_string)
+        # check if all new pairs are indeed new, else reset
+        if npairs.isdisjoint(opairs):
+            new_pairs_found = True
+        else:
+            npairs = set()
+            nparticipants = copy.deepcopy(participants)
 
-# write output into text file for later use
-with open(new_pairs_txt, "wb") as file:
-    file.write(output_string.encode("utf8"))
 
-# write new pairs into CSV file (for e.g. use in MailMerge)
-with open(new_pairs_csv, "w") as file:
-    header = ["name1", "email1", "name2", "email2", "name3", "email3"]
-    file.write(DELIMITER.join(header) + "\n")
+    # assemble output for printout
+    output_string = ""
+
+    output_string += "------------------------\n"
+    output_string += "Today's coffee partners:\n"
+    output_string += "------------------------\n"
+
     for pair in npairs:
         pair = list(pair)
+        output_string += "* "
         for i in range(0,len(pair)):
-            name_email_pair = f"{formdata[formdata[header_email] == pair[i]].iloc[0][header_name]}{DELIMITER} {pair[i]}"
+            name_email_pair = f"{formdata[formdata[header_email] == pair[i]].iloc[0][header_name]} ({pair[i]})"
             if i < len(pair)-1:
-                file.write(name_email_pair + DELIMITER + " ")
+                output_string += name_email_pair + ", "
             else:
-                file.write(name_email_pair + "\n")
+                output_string += name_email_pair + "\n"
+        
+    # write output to console
+    print(output_string)
+
+    # write output into text file for later use
+    with open(new_pairs_txt, "wb") as file:
+        file.write(output_string.encode("utf8"))
+
+    # write new pairs into CSV file (for e.g. use in MailMerge)
+    with open(new_pairs_csv, "w") as file:
+        header = ["name1", "email1", "name2", "email2", "name3", "email3"]
+        file.write(DELIMITER.join(header) + "\n")
+        for pair in npairs:
+            pair = list(pair)
+            for i in range(0,len(pair)):
+                name_email_pair = f"{formdata[formdata[header_email] == pair[i]].iloc[0][header_name]}{DELIMITER} {pair[i]}"
+                if i < len(pair)-1:
+                    file.write(name_email_pair + DELIMITER + " ")
+                else:
+                    file.write(name_email_pair + "\n")
+                    
+    # append pairs to history file
+    if os.path.exists(all_pairs_csv):
+        mode = "a"
+    else:
+        mode = "w"
+
+    with open(all_pairs_csv, mode) as file:
+        for pair in npairs:
+            pair = list(pair)
+            for i in range(0,len(pair)):
+                if i < len(pair)-1:
+                    file.write(pair[i] + DELIMITER)
+                else:
+                    file.write(pair[i] + "\n")
+
+
                 
-# append pairs to history file
-if os.path.exists(all_pairs_csv):
-    mode = "a"
-else:
-    mode = "w"
-
-with open(all_pairs_csv, mode) as file:
-    for pair in npairs:
-        pair = list(pair)
-        for i in range(0,len(pair)):
-            if i < len(pair)-1:
-                file.write(pair[i] + DELIMITER)
-            else:
-                file.write(pair[i] + "\n")
+    # print finishing message
+    print()
+    print("Job done.")
 
 
-             
-# print finishing message
-print()
-print("Job done.")
+#function to 
+def introduction():
+    print("Welcome to the Coffee Pairing! First you must sign up by going to this link: https://docs.google.com/forms/d/e/1FAIpQLSfTtx1Zv_239qeMjlAAfU8BOABsQGbILvXG9_RGsnLRJbB_BQ/viewform?usp=dialog")
+    begin = input("Once you're done, hit enter to proceed")
+    if begin == "":
+        print("Your group will be formed shortly!")
+        create_pairings()
+    else:
+        print("Invalid input!")
+        introduction()
+
+#start the pairings
+introduction()
