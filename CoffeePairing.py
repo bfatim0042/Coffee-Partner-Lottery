@@ -4,8 +4,8 @@ import csv
 import random
 import copy
 import os
-#import send_email
-#import text_functions  
+import asyncio
+#from text_functions import send_email
 
 #libraries to handle API
 import gspread
@@ -17,7 +17,7 @@ def create_pairings():
         "https://www.googleapis.com/auth/drive"
     ]
     #Instructions to access the key are in the documentation 
-    creds = Credentials.from_service_account_file("key.json", scopes=SCOPES)
+    creds = Credentials.from_service_account_file("apikey.json", scopes=SCOPES)
     client = gspread.authorize(creds)
 
     #Opening the sheet attached to the Google Form responses 
@@ -213,7 +213,13 @@ def create_pairings():
         # print finishing message
         print()
         print("Job done.")
-        import text_functions
+    
+        # send emails to participants
+        #for group in npairs:
+            #for email in group:
+                # get participant name
+                #name = formdata[formdata[header_email] == email].iloc[0][header_name]
+                #asyncio.run(send_email(email, name, ice_breaker_n))
 
 
 

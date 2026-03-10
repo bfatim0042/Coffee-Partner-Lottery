@@ -5,7 +5,7 @@ Created on Fri Mar  6 10:26:12 2026
 @author: Lucia
 """
 #install first
-#pip install pingram-python
+#pip install pingram-python 
 import asyncio
 from pingram import Pingram
 
