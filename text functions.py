@@ -163,6 +163,7 @@ round_ice_breaker=random_ice_breaker()
 
 #generate individual messages
 for header_name in participants:
+    print(header_name, header_email)
     welcome_participants = welcome_message(header_name)
     create_text_file(header_name,welcome_participants)
 #send emails to all participants greeting them, and the ice_breaker
