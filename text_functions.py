@@ -73,11 +73,12 @@ async def send_email(email, name, ice_breaker):
             "email": {
                 "subject": "Weekly Coffee Partner Lottery",
 #<b> and <\b> open and closes bold text respectively (in html)
-                "html": f"""<h1>Welcome to the Weekly Coffee Partner Lottery <b>{name} !<br></
-                h1><p>Thanks for joining our Weekly Coffee Partner Lottery.<br>
+                "html": f"""
+                <h1>Welcome to the Weekly Coffee Partner Lottery <b>{name}</b>!</h1>
+                <p>Thanks for joining our Weekly Coffee Partner Lottery.<br>
                 It is a pleasure to have you with us.<br>
 
-                As every week, you have been assigned to a group for an <b>informal coffee meeting<\b>.<br>
+                As every week, you have been assigned to a group for an <b>informal coffee meeting</b>.<br>
                 Here is the <b>ice breaker</b> of the week:<br>
                     
                 {ice_breaker}<br>
@@ -96,8 +97,6 @@ async def send_email(email, name, ice_breaker):
                 "coffeeprojectgroup1@gmail.com"
             }
         })
-
-asyncio.run(send_email())
       
         
 name1="Ice_breaker_round_1"
@@ -156,15 +155,3 @@ def random_ice_breaker():
         print_text_file(name7)
         ice_breaker_n=comment_ice_breaker7
     return ice_breaker_n
-
-round_ice_breaker=random_ice_breaker()
-#determine the groups and how many participants are there in it
-
-#generate individual messages
-for header_name in participants:
-    print(header_name, header_email)
-    welcome_participants = welcome_message(header_name, round_ice_breaker)
-    create_text_file(header_name,welcome_participants)
-#send emails to all participants greeting them, and the ice_breaker
-    email_participant=send_email(header_email, header_name, round_ice_breaker)
-print("Emails with the ice breaker succesfully sent to participants!")

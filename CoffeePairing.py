@@ -4,12 +4,15 @@ import csv
 import random
 import copy
 import os
-import asyncio
 from itertools import combinations
 
 #libraries to handle API
 import gspread
 from google.oauth2.service_account import Credentials
+
+#importing email functions
+from text_functions import random_ice_breaker, send_email
+import asyncio
 
 def create_pairings():
     SCOPES = [
@@ -239,6 +242,25 @@ def create_pairings():
     # print finishing message
     print()
     print("Job done.")
+
+    # sending the emails
+    ice_breaker = random_ice_breaker()
+
+    for group in npairs:
+        for email in group:
+            name = formdata[formdata[header_email] == email].iloc[0][header_name]
+            partners = []
+
+#making a list of the partners for the email
+            for member in group:
+                if member != email:
+                    partner_name = formdata[formdata[header_email] == member].iloc[0][header_name]
+                    partners.append(partner_name)
+
+            allpartners = ", ".join(partners)
+            asyncio.run(send_email(email, name + " | Partner(s): " + allpartners, ice_breaker))
+
+    print("Emails successfully sent to participants!")
 
 
 def introduction():
